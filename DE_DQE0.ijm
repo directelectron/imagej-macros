@@ -5,6 +5,8 @@ print("Date : 2021.11.26");
 print("Author : Benjamin Bammes, Direct Electron LP (bbammes@directelectron.com)");
 print("License : GNU General Public License v2.0");
 print("");
+print("Uses the noise binning method as described in McMullan, et al. 2009. Ultramicroscopy 109:1126-43.");
+print("");
 
 openImages = getList("image.titles");
 if (openImages.length < 1) {
