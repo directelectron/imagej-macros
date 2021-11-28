@@ -1,0 +1,12 @@
+ImageJ macros for calculating MTF from an image of a polished straight edge slanted at an angle of ~5-15 degrees:
+  
+  Slanted Edge MTF
+  https://imagej.nih.gov/ij/plugins/se-mtf/index.html
+  
+  ASI_MTF
+  https://github.com/emx77/ASI_MTF
+
+Alternatively, if the beamstop is the only knife-edge available, try the following Linux software:
+  
+  FindDQE
+  https://grigoriefflab.umassmed.edu/finddqe
