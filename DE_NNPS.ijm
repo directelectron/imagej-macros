@@ -1,13 +1,13 @@
 print("\\Clear");
 print("DE_NNPS");
-print("Version : 1.1");
-print("Date : 2021.12.11");
+print("Version : 1.01");
+print("Date : 2021.12.21");
 print("Author : Benjamin Bammes, Direct Electron LP (bbammes@directelectron.com)");
 print("License : GNU General Public License v2.0");
 print("Requires : https://imagej.nih.gov/ij/plugins/radial-profile.html");
 print("");
 
-openImages = getList("image.titles");
+openImages = getList("window.titles");
 if (openImages.length < 1) {
 	print("Error");
 	exit("No image stack found.");
