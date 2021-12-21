@@ -1,7 +1,7 @@
 print("\\Clear");
 print("DE_MagCal");
 print("Version : 1.0");
-print("Date : 2021.12.16");
+print("Date : 2021.12.21");
 print("Author : Benjamin Bammes, Direct Electron LP (bbammes@directelectron.com)");
 print("License : GNU General Public License v2.0");
 print("Requires : https://imagej.nih.gov/ij/plugins/radial-profile.html");
@@ -22,6 +22,13 @@ apix = 0.0;
 
 typeOfData = getNumber("Type of Data (0 = crossed-lines (low magnifications),  1 = gold (high magnifications))", 0);
 
+if (typeOfData == 0) {
+	print("Finding pixel size using crossed-lines (for low magnifications)");
+}
+else {
+	print("Finding pixel size using gold lattice spacing (for high magnifications)");
+}
+
 print("Calculating FFT...");
 
 run("FFT Options...", "fft raw do");
@@ -33,7 +40,7 @@ if ((psWidth < 512) || (psHeight < 512)) {
 	print("Error");
 	exit("ROI size must be at least 512 x 512.");
 }
-rename("MagCal_PS");
+rename("MagCal_PS_Full");
 
 if (typeOfData == 0) {
 
@@ -41,6 +48,7 @@ if (typeOfData == 0) {
 	
 	makeRectangle(psWidth * 3 / 8, psHeight * 3 / 8, psWidth / 4, psHeight / 4);
 	run("Crop");
+	rename("MagCal_PS");
 	getDimensions(psWidthCropped, psHeightCropped, psChannelsCropped, psSlicesCropped, psFramesCropped);
 	getStatistics(psArea, psMean, psMin, psMax, psStd, psHistogram);
 
@@ -204,7 +212,7 @@ if (typeOfData == 0) {
 	
 	fractionOfNyquist = minDistance / (psWidth / 2.0);
 	lineSpacingInAngstroms = 10000000.0 / 2160.0;
-	apix = round(1000.0 * lineSpacingInAngstroms * fractionOfNyquist) / 1000.0;
+	apix = round(10000.0 * lineSpacingInAngstroms * fractionOfNyquist) / 10000.0;
 
 	makeRectangle((psWidthCropped / 2.0 - minDistance * 4.0), Math.round(psHeightCropped / 2.0 - minDistance * 4.0), Math.round(8.0 * minDistance), Math.round(8.0 * minDistance));
 	run("Crop");
@@ -221,7 +229,7 @@ else if (typeOfData == 1) {
 
 	run("Scale...", "x=.25 y=.25 width=" + (psWidth / 4) + " height=" + (psHeight / 4) + " interpolation=Bilinear average create");
 	rename("MagCal_PS");
-	close("PS of " + activeImageTitle);
+	close("MagCal_PS_Full");
 	
 	selectWindow("MagCal_PS");
 	getDimensions(psWidth, psHeight, psChannels, psSlices, psFrames);
@@ -238,7 +246,7 @@ else if (typeOfData == 1) {
 	
 	bgSubtractedY = newArray(plotX.length);
 	for (n = 0; n < plotX.length; n++) {
-		if ((n < 16) || (n >= (plotX.length - 8))) {
+		if ((n < maxOf(8, Math.round(plotX.length / 16.0))) || (n >= (plotX.length - 8))) {
 			bgSubtractedY[n] = 0.0;
 		}
 		else {
@@ -284,7 +292,7 @@ else if (typeOfData == 1) {
 
 	makeOval(Math.round(psWidth / 2.0 - peakLocation), Math.round(psHeight / 2.0 - peakLocation), Math.round(2.0 * peakLocation), Math.round(2.0 * peakLocation));
 	
-	apix = round(1000.0 * (peakLocation / (psWidth / 2.0)) * 2.355 / 2.0) / 1000.0;
+	apix = round(10000.0 * (peakLocation / (psWidth / 2.0)) * 2.321 / 2.0) / 10000.0;
 
 }
 
