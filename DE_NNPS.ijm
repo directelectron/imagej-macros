@@ -1,7 +1,7 @@
 print("\\Clear");
 print("DE_NNPS");
-print("Version : 1.0");
-print("Date : 2021.11.26");
+print("Version : 1.1");
+print("Date : 2021.12.11");
 print("Author : Benjamin Bammes, Direct Electron LP (bbammes@directelectron.com)");
 print("License : GNU General Public License v2.0");
 print("Requires : https://imagej.nih.gov/ij/plugins/radial-profile.html");
@@ -85,10 +85,24 @@ for (i = 0; i < resultArrayX.length; i++) {
 		lowFreqArray = Array.concat(lowFreqArray, resultArrayY[i]);
 	}
 }
-Array.getStatistics(lowFreqArray, min, max, mean, std);
+Array.getStatistics(lowFreqArray, lowFreqMin, lowFreqMax, lowFreqMean, lowFreqStd);
+highFreqArray = newArray(0);
+for (i = 0; i < resultArrayX.length; i++) {
+	if ((resultArrayX[i] >= 0.80) && (resultArrayX[i] <= 0.96)) {
+		highFreqArray = Array.concat(highFreqArray, resultArrayY[i]);
+	}
+}
+Array.getStatistics(highFreqArray, highFreqMin, highFreqMax, highFreqMean, highFreqStd);
+mean = lowFreqMean;
+if (((lowFreqMean / highFreqMean) >= 0.666667) && ((lowFreqMean / highFreqMean) <= 1.5)) {
+	print("  Counting mode detected");
+	mean = highFreqMean;
+}
 for (i = 0; i < resultArrayX.length; i++) {
 	resultArrayY[i] = resultArrayY[i] / mean;
 }
+
+print("NPS(0) : " + mean);
 
 nnpsLength = Math.floor(psWidth / 2);
 
