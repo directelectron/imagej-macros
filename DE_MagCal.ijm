@@ -22,20 +22,20 @@ apix = 0.0;
 
 typeOfData = getNumber("Type of Data (0 = crossed-lines (low magnifications),  1 = gold (high magnifications))", 0);
 
+print("Calculating FFT...");
+
+run("FFT Options...", "fft raw do");
+close("FFT of " + activeImageTitle);
+selectWindow("PS of " + activeImageTitle);
+getDimensions(psWidth, psHeight, psChannels, psSlices, psFrames);
+if ((psWidth < 512) || (psHeight < 512)) {
+	close("PS of " + activeImageTitle);
+	print("Error");
+	exit("ROI size must be at least 512 x 512.");
+}
+rename("MagCal_PS");
+
 if (typeOfData == 0) {
-	
-	print("Calculating FFT...");
-	
-	run("FFT Options...", "fft raw do");
-	close("FFT of " + activeImageTitle);
-	selectWindow("PS of " + activeImageTitle);
-	getDimensions(psWidth, psHeight, psChannels, psSlices, psFrames);
-	if ((psWidth < 512) || (psHeight < 512)) {
-		close("PS of " + activeImageTitle);
-		print("Error");
-		exit("ROI size must be at least 512 x 512.");
-	}
-	rename("MagCal_PS");
 
 	setPixel(psWidth / 2, psHeight / 2, 0.0);
 	
