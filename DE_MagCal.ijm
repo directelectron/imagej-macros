@@ -1,13 +1,13 @@
 print("\\Clear");
 print("DE_MagCal");
-print("Version : 1.01");
+print("Version : 1.02");
 print("Date : 2021.12.21");
 print("Author : Benjamin Bammes, Direct Electron LP (bbammes@directelectron.com)");
 print("License : GNU General Public License v2.0");
 print("Requires : https://imagej.nih.gov/ij/plugins/radial-profile.html");
 print("");
 
-openImages = getList("window.titles");
+openImages = getList("image.titles");
 if (openImages.length < 1) {
 	print("Error");
 	exit("No image found.");
