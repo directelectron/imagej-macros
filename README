@@ -1,0 +1,10 @@
+Install the Radial Profile plugin before running these macros. This plugin is available at:
+  https://imagej.nih.gov/ij/plugins/radial-profile.html
+
+If you have trouble running any of these macros, first try updating ImageJ/Fiji. Some of the functions used in the macros are only available in newer versions.
+
+If you have questions or suggestions for improvements, please email:
+  bbammes@directelectron.com
+  Benjamin Bammes, PhD
+  Director of Research & Development
+  Direct Electron
