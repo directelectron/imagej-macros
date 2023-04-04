@@ -1,10 +1,157 @@
 Install the Radial Profile plugin before running these macros. This plugin is available at:
   https://imagej.nih.gov/ij/plugins/radial-profile.html
 
-If you have trouble running any of these macros, first try updating ImageJ/Fiji. Some of the functions used in the macros are only available in newer versions.
+If you have trouble running any of these macros, first try updating ImageJ/Fiji.
+Some of the functions used in the macros are only available in newer versions.
 
 If you have questions or suggestions for improvements, please email:
   bbammes@directelectron.com
   Benjamin Bammes, PhD
   Director of Research & Development
   Direct Electron
+
+To have ImageJ/Fiji load these macros into the Plugins/Macros menu automatically at startup,
+copy all macros into the Fiji.app\macros folder and then paste the following code in the
+Fiji.app\macros\StartupMacros.fiji.ijm file:
+
+// Start: Direct Electron section
+// Add this section before the "About Startup Macros..." line
+// in StartupMacros.fiji.ijm
+
+macro "About Direct Electron Macros..." {
+	title = "About Direct Electron Macros";
+	text1 = "Direct Electron (directelectron.com) is the technology leader\n"
+		+ "in direct detection cameras for electron microscopy and other\n"
+		+ "high-performance scientific cameras.";
+	text2 = "These macros are provided to assist with common image\n"
+	    + "processing, camera characterization, and calibration tasks in\n"
+	    + "ImageJ. These macros are freely available for anyone interested\n"
+	    + "(regardless of whether they use Direct Electron's cameras).";
+	text3 = "If you have suggestions or make any changes to these macros,\n"
+		+ "we kindly ask that you share them with us for the benefit of\n"
+		+ "the broader scientific community.";
+	text4 = "Updates to these macros are available on Direct Electron's\n"
+		+ "GitHub page (https://github.com/directelectron/imagej-macros).";
+	Dialog.createNonBlocking(title);
+	Dialog.addMessage(text1);
+	Dialog.addMessage(text2);
+	Dialog.addMessage(text3);
+	Dialog.addMessage(text4);
+	Dialog.show();
+}
+
+macro "Coincidence Loss Calculator..." {
+	if (File.exists("DE_CoincLoss.ijm")) {
+		runMacro("DE_CoincLoss.ijm");
+	}
+	else {
+		title = "Macro Not Found";
+		text1 = "DE_CoincLoss.ijm was not found in the macro folder.";
+		text2 = "Download the macro from Direct Electron's GitHub page\n"
+			+ "(https://github.com/directelectron/imagej-macros).";
+		Dialog.create(title);
+		Dialog.addMessage(text1);
+		Dialog.addMessage(text2);
+		Dialog.show();
+	}
+}
+
+macro "DQE Curve Calculator..." {
+	if (File.exists("DE_DQECurve.ijm")) {
+		runMacro("DE_DQECurve.ijm");
+	}
+	else {
+		title = "Macro Not Found";
+		text1 = "DE_DQECurve.ijm was not found in the macro folder.";
+		text2 = "Download the macro from Direct Electron's GitHub page\n"
+			+ "(https://github.com/directelectron/imagej-macros).";
+		Dialog.create(title);
+		Dialog.addMessage(text1);
+		Dialog.addMessage(text2);
+		Dialog.show();
+	}
+}
+
+macro "DQE0 Calculator..." {
+	if (File.exists("DE_DQE0.ijm")) {
+		runMacro("DE_DQE0.ijm");
+	}
+	else {
+		title = "Macro Not Found";
+		text1 = "DE_DQE0.ijm was not found in the macro folder.";
+		text2 = "Download the macro from Direct Electron's GitHub page\n"
+			+ "(https://github.com/directelectron/imagej-macros).";
+		Dialog.create(title);
+		Dialog.addMessage(text1);
+		Dialog.addMessage(text2);
+		Dialog.show();
+	}
+}
+
+macro "False Positives Calculator..." {
+	if (File.exists("DE_FalsePos.ijm")) {
+		runMacro("DE_FalsePos.ijm");
+	}
+	else {
+		title = "Macro Not Found";
+		text1 = "DE_FalsePos.ijm was not found in the macro folder.";
+		text2 = "Download the macro from Direct Electron's GitHub page\n"
+			+ "(https://github.com/directelectron/imagej-macros).";
+		Dialog.create(title);
+		Dialog.addMessage(text1);
+		Dialog.addMessage(text2);
+		Dialog.show();
+	}
+}
+
+macro "Magnification Calibration..." {
+	if (File.exists("DE_MagCal.ijm")) {
+		runMacro("DE_MagCal.ijm");
+	}
+	else {
+		title = "Macro Not Found";
+		text1 = "DE_MagCal.ijm was not found in the macro folder.";
+		text2 = "Download the macro from Direct Electron's GitHub page\n"
+			+ "(https://github.com/directelectron/imagej-macros).";
+		Dialog.create(title);
+		Dialog.addMessage(text1);
+		Dialog.addMessage(text2);
+		Dialog.show();
+	}
+}
+
+macro "MTF Calculator (from ASI)..." {
+	if (File.exists("ASI_MTF.ijm")) {
+		runMacro("ASI_MTF.ijm");
+	}
+	else {
+		title = "Macro Not Found";
+		text1 = "ASI_MTF.ijm was not found in the macro folder.";
+		text2 = "Download the macro from Erik Maddox's GitHub page\n"
+			+ "(https://github.com/emx77/ASI_MTF).";
+		Dialog.create(title);
+		Dialog.addMessage(text1);
+		Dialog.addMessage(text2);
+		Dialog.show();
+	}
+}
+
+macro "NNPS Calculator..." {
+	if (File.exists("DE_NNPS.ijm")) {
+		runMacro("DE_NNPS.ijm");
+	}
+	else {
+		title = "Macro Not Found";
+		text1 = "DE_NNPS.ijm was not found in the macro folder.";
+		text2 = "Download the macro from Direct Electron's GitHub page\n"
+			+ "(https://github.com/directelectron/imagej-macros).";
+		Dialog.create(title);
+		Dialog.addMessage(text1);
+		Dialog.addMessage(text2);
+		Dialog.show();
+	}
+}
+
+macro "-" {} //menu divider
+
+// End: Direct Electron section
